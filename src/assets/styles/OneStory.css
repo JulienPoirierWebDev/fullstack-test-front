@@ -1,0 +1,23 @@
+.col .card {
+    background-color: var(--color4);
+    border: 3px solid var(--color1) !important;
+}
+
+.h5 {
+    color: var(--color1) !important;
+}
+
+.btn-primary {
+    color: white !important;
+    background-color: var(--color4) !important;
+    border: 2px solid var(--color1);
+    border-radius: 5px;
+
+}
+
+.btn-primary:hover {
+    background-color: var(--color1) !important;
+    color: white !important;
+    border: 2px solid var(--color1);
+
+}
