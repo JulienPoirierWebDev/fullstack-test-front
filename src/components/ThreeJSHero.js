@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 
-import {Canvas, extend} from '@react-three/fiber'
+import {Canvas, extend, useFrame} from '@react-three/fiber'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 import myFont from "../assets/fonts/gentilis_bold.typeface.json"
 
@@ -12,6 +12,38 @@ extend({ TextGeometry })
 
 
 const ThreeJSHero = () => {
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+    const [screenHeight, setScreenHeight] = useState(window.innerHeight)
+    const [grpIcosahedronGeometry, setGrpIcosahedronGeometry] = useState([])
+    const [grpOctahedronGeometry, setGrpOctahedronGeometry] = useState([])
+    const [grpTetrahedronGeometry, setGrpTetrahedronGeometry] = useState([])
+
+
+    const handleResize = () => {
+        setScreenWidth(window.innerWidth)
+        setScreenHeight(window.innerHeight)
+        console.log(-2*screenWidth*0.001)
+    }
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize, false);
+
+        let initiateIco = []
+        let initiateOcta = []
+        let initiateTetra = []
+        for (let j = 0; j < 25; j++) {
+
+            initiateIco.push(createElement());
+            initiateOcta.push(createElement());
+            initiateTetra.push(createElement());
+            setGrpIcosahedronGeometry(initiateIco)
+            setGrpOctahedronGeometry(initiateOcta)
+            setGrpTetrahedronGeometry(initiateTetra)
+
+        }
+
+    }, []);
+
 
 
 //---------- Text 3D
@@ -23,8 +55,8 @@ const ThreeJSHero = () => {
 
     const options = {
         font,
-        size:1,
-        height:0.5,
+        size:0.1*screenWidth/100,
+        height:0.05 * screenHeight/50,
         curveSegments:6,
         bevelEnabled: true,
         bevelThickness:bevelThickness,
@@ -55,92 +87,134 @@ const ThreeJSHero = () => {
     }
 
 
-    let icosahedronGeometry = [];
-    let octahedronGeometry = [];
-    let tetrahedronGeometry = [];
-    for (let j = 0; j < 25; j++) {
-
-            icosahedronGeometry.push(createElement());
-            octahedronGeometry.push(createElement());
-            tetrahedronGeometry.push(createElement());
-
-    }
-
         //--------------------
 
 
+    function IcosahedronGeometry(props) {
+
+        const meshRef = useRef("ico" + Math.random())
+
+        useFrame(() => {
+            if(!meshRef.current) {
+                return
+            }
+
+            meshRef.current.rotation.x += 0.01
+            meshRef.current.rotation.y += 0.01
+
+        })
+
+        return (
+            <mesh ref={meshRef}
+                position={[props.element.position.x,props.element.position.y,props.element.position.z]}
+                rotation={[props.element.rotation.x,props.element.rotation.y,props.element.rotation.z]}
+
+            >
+                <icosahedronGeometry/>
+                <meshStandardMaterial color={'#989898'} />
+            </mesh>
+        )
+    }
+
+    function OctahedronGeometry(props) {
+
+        const meshRef = useRef("octa" + Math.random())
+
+        useFrame(() => {
+            if(!meshRef.current) {
+                return
+            }
+
+            meshRef.current.rotation.x += 0.01
+            meshRef.current.rotation.y += 0.01
+
+        })
+        return (
+            <mesh ref={meshRef}
+                position={[props.element.position.x,props.element.position.y,props.element.position.z]}
+                rotation={[props.element.rotation.x,props.element.rotation.y,props.element.rotation.z]}
+
+            >
+                <octahedronGeometry/>
+                <meshStandardMaterial color={'#1F6935'} />
+            </mesh>
+        )
+    }
+
+    function TetrahedronGeometry(props) {
+
+
+        const meshRef = useRef("ico" + Math.random())
+
+        useFrame(() => {
+            if(!meshRef.current) {
+                return
+            }
+
+            meshRef.current.rotation.x += 0.01
+            meshRef.current.rotation.y += 0.01
+
+        })
+
+        return (
+            <mesh ref={meshRef}
+                position={[props.element.position.x,props.element.position.y,props.element.position.z]}
+                rotation={[props.element.rotation.x,props.element.rotation.y,props.element.rotation.z]}
+
+            >
+                <tetrahedronGeometry/>
+                <meshStandardMaterial color={'#00A632'} />
+            </mesh>
+        )
+    }
+
+
+
     return (
-        <div style={{ "width":"100%", "overflow":"hidden"}} id="canvas-container">
-            <Canvas className={"vh-100 position-relative"} style={{"width":"100vw",'backgroundColor':"black", "overflow":"hidden !important"}}>
+            <Canvas className={"position-relative"} style={{"width":"100%", "height":"100vh", 'backgroundColor':"black", "overflow":"hidden !important"}}>
                 <ambientLight intensity={0.3} />
+                <color attach="background" args={["black"]} />
 
                 <directionalLight color="white" position={[0, 0, 5]} />
                 <directionalLight color="white" position={[0, 0, -5]} />
 
 
-                <mesh ref={readMesh} position={[-4,1,0]} rotation={[0,0,0]}>
+                <mesh ref={readMesh} position={[-3+(screenWidth*0.00000000000001),1.5,0]} rotation={[0,0,0]}>
                     <textGeometry args={['Read', options]}/>
                     <meshStandardMaterial color={'#00A632'} />
                 </mesh>
 
 
-                <mesh ref={writeMesh} position={[-4,0,0]}>
+                <mesh ref={writeMesh} position={[-3+(screenWidth*0.0000000000001),0,0]}>
                     <textGeometry args={['Write', options]}/>
                     <meshStandardMaterial color={'#989898'} />
                 </mesh>
 
 
-                <mesh ref={earnMesh} position={[-4,-1,0]}>
+                <mesh ref={earnMesh} position={[-3+(screenWidth*0.00000000000001),-1.5,0]}>
                     <textGeometry args={['Earn', options]}/>
                     <meshStandardMaterial color={'#1F6935'} />
                 </mesh>
 
-                {icosahedronGeometry.map(element => {
+                {grpIcosahedronGeometry.map(element => {
                    return (
-                        <mesh
-                            key={element.position.x}
-                            position={[element.position.x,element.position.y,element.position.z]}
-                            rotation={[element.rotation.x,element.rotation.y,element.rotation.z]}
-
-                        >
-                            <icosahedronGeometry/>
-                            <meshStandardMaterial color={'#989898'} />
-                        </mesh>
+                       <IcosahedronGeometry key={element.position.x} element={element} />
                     )
                 })}
 
-                {octahedronGeometry.map(element => {
+                {grpOctahedronGeometry.map(element => {
                     return (
-                        <mesh
-                            key={element.position.x}
-                            position={[element.position.x,element.position.y,element.position.z]}
-                            rotation={[element.rotation.x,element.rotation.y,element.rotation.z]}
-
-                        >
-                            <octahedronGeometry/>
-                            <meshStandardMaterial color={'#00A632'} />
-                        </mesh>
+                        <OctahedronGeometry key={element.position.x} element={element} />
                     )
                 })}
 
-                {tetrahedronGeometry.map(element => {
+                {grpTetrahedronGeometry.map(element => {
                     return (
-                        <mesh
-                            key={element.position.x}
-                            position={[element.position.x,element.position.y,element.position.z]}
-                            rotation={[element.rotation.x,element.rotation.y,element.rotation.z]}
-
-                        >
-                            <tetrahedronGeometry/>
-                            <meshStandardMaterial color={'#1F6935'} />
-                        </mesh>
+                        <TetrahedronGeometry key={element.position.x} element={element} />
                     )
                 })}
-
 
             </Canvas>
-        </div>
-
     )
 }
 

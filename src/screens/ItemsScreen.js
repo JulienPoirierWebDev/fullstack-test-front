@@ -77,7 +77,6 @@ const ItemsScreen = ({}) => {
   return (
       <>
           <div className="container-fluid main_container gx-0 w-100 m-0">
-              <Authenticated/>
               <Row className={"m-0 p-0 vw-100"}>
                   <Col className={"w-100 position-relative d-flex flex-column p-0"}>
                       <Header/>

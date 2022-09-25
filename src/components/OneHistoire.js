@@ -82,7 +82,7 @@ const OneHistoire = (props) => {
     return (
         <>
             <Col>
-                <Card className={"m-auto mt-5 d-flex flex-column align-content-around"} style={{ width: '25rem'}}>
+                <Card className={"m-auto mt-5 d-flex flex-column align-content-around"} style={{ maxWidth: '25rem'}}>
                     {Object.keys(img).length>= 0 ?
                         <Card.Img style={{ width:"auto", maxHeight:'12rem'}} className={" m-auto mt-3"} variant="top" src={api_url + "/"+img.image} />
                         : ""}

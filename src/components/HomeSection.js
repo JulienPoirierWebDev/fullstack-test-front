@@ -13,9 +13,9 @@ const HomeSection = (props) => {
     if(props.right) {
         return (
             <>
-                <Row className={"home_section p-5 align-content-center"}>
-                    <Col sm={4} className={"justify-content-around"} md={4}>
-                        <img  className={"m-auto w-75 rounded-5"} src={props.src} alt={props.alt}/>
+                <Row className={"home_section align-content-center mt-5"}>
+                    <Col sm={4} className={"justify-content-center m-auto mt-5 mb-3"} md={4}>
+                        <img  className={"m-auto w-75 rounded-5 d-block"} src={props.src} alt={props.alt}/>
                     </Col>
                     <Col md={6}  className={"m-auto"}>
                         <h2>{props.title}</h2>
@@ -28,13 +28,13 @@ const HomeSection = (props) => {
     else {
         return (
             <>
-                <Row className={"home_section p-5 d-flex align-items-baseline"}>
+                <Row className={"home_section d-flex align-items-baseline mt-3 mb-5"}>
                     <Col md={6}  className={"m-auto"}>
                         <h2>{props.title}</h2>
                         <p>{props.content}</p>
                     </Col>
-                    <Col className={"m-auto"} md={4}>
-                        <img className={"m-auto w-75 rounded-5"} src={props.src} alt={props.alt}/>
+                    <Col sm={4} className={"justify-content-center m-auto mt-3"} md={4}>
+                        <img className={"m-auto w-75 rounded-5 d-block"} src={props.src} alt={props.alt}/>
                     </Col>
 
                 </Row>

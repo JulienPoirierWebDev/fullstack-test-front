@@ -40,7 +40,6 @@ const Header = () => {
                         <LinkContainer to="/mon-profil">
                             <Nav.Link>Voir mon profil</Nav.Link>
                         </LinkContainer>
-
                         <Button className={"m-5 mt-0 mb-0"} onClick={disconnect}>Se déconnecter</Button>
                     </Nav>
                     :<Nav className="ms-auto">

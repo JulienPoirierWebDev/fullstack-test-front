@@ -16,7 +16,10 @@ const HomeScreen = () => {
             <Row className={"m-0 p-0 vw-100"}>
                 <Col className={"vh-100 w-100 position-relative d-flex flex-column p-0"}>
                     <Header/>
-                    <ThreeJSHero/>
+                    <div className={"three-js"} style={{ "width":"100%", "overflow":"hidden"}} id="canvas-container">
+
+                        <ThreeJSHero/>
+                    </div>
                     <HeroContent/>
                 </Col>
             </Row>

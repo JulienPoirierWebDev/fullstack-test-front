@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color:var(--color4);
+  background-color:var(--color4) !important;
   color: white;
 }
 
@@ -34,4 +34,10 @@ span {
 .alert-primary {
   background-color: var(--color1) !important;
   border: 3px solid var(--color1) !important;
+}
+
+@media (max-width: 900px) {
+  .three-js {
+    display: none;
+  }
 }

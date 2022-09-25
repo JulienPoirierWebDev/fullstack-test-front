@@ -68,7 +68,7 @@ const Authenticated = (props) => {
 
     useEffect(() => {
         if(authenticateWaiting === false && !isLogged) {
-            navigate("/")
+            navigate("/se-connecter/")
         }
     }, [authenticateWaiting])
 
