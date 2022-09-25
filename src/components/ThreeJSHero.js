@@ -179,19 +179,19 @@ const ThreeJSHero = () => {
                 <directionalLight color="white" position={[0, 0, -5]} />
 
 
-                <mesh ref={readMesh} position={[-3+(screenWidth*0.00000000000001),1.5,0]} rotation={[0,0,0]}>
+                <mesh ref={readMesh} position={[-4+(screenWidth*0.00000000000001),1.5,0]} rotation={[0,0,0]}>
                     <textGeometry args={['Read', options]}/>
                     <meshStandardMaterial color={'#00A632'} />
                 </mesh>
 
 
-                <mesh ref={writeMesh} position={[-3+(screenWidth*0.0000000000001),0,0]}>
+                <mesh ref={writeMesh} position={[-4+(screenWidth*0.0000000000001),0,0]}>
                     <textGeometry args={['Write', options]}/>
                     <meshStandardMaterial color={'#989898'} />
                 </mesh>
 
 
-                <mesh ref={earnMesh} position={[-3+(screenWidth*0.00000000000001),-1.5,0]}>
+                <mesh ref={earnMesh} position={[-4+(screenWidth*0.00000000000001),-1.5,0]}>
                     <textGeometry args={['Earn', options]}/>
                     <meshStandardMaterial color={'#1F6935'} />
                 </mesh>

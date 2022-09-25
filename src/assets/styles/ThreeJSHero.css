@@ -3,6 +3,7 @@
     z-index: 99;
     padding: 20px;
     border-radius: 10px;
+    height: 100%;
     background-color: var(--color4) !important;
 }
 
@@ -25,6 +26,23 @@
 
 
 @media (min-width: 900px) {
+    .hero_content {
+        position: absolute;
+        top: 18%;
+        right: 5%;
+        width: 30%;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .hero_content>p{
+        margin: 40px 0;
+
+    }
+
+}
+
+@media (min-width: 1200px) {
     .hero_content {
         position: absolute;
         top: 30%;
